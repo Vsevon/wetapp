@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Погодное приложение</title>
+    <!-- тут подключаем bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-4 offset-1">
+                <h1>Погода в вашем городе:</h1>
+                <form action="" method="POST">
+                   {% csrf_token %}
+                    <label for="city"> Город </label>
+                   {{ form.name }}
+                    <input type="submit" name="send" value="Узнать" сlass="mt-2 btn btn-danger">
+                </form>
+            </div>
+
+            <div class="col-5 offset-1">
+                <h1>Информация:</h1>
+                {%for info in all_info%}
+                <div class="alert alert-info">
+                    <div class="row">
+                        <div class="col-9">
+                            <b>Город:</b> {{info.city_name}} <b>Температура</b> {{info.temp}} <sup>o</sup> <br>
+                            <b>Ветренность:</b> {{ info.wind }} <sup>o</sup> <br>
+                        </div>
+                        <div class="col-10 offset-1">
+                            <img src="http://openweathermap.org/img/w/{{info.icon}}.png" alt="фото погоды"
+                                class="img-thumbnail">
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
